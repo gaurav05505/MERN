@@ -1,0 +1,16 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* color: white; */
+}
+
+html , body{
+  height: 100vh;
+  width: 100%;
+  /* background-color: black; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* color: white; */
+}
