@@ -1,0 +1,16 @@
+{
+  "name": "handling",
+  "version": "1.0.0",
+  "description": "In the world of backend development, a Cookie is a small piece of data that a Server sends to a User's Browser. The browser stores this data and sends it back to the server every time the user makes a new request.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}
