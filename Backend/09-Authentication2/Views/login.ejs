@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\stylesheets\style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="h-screen w-full bg-black text-white p-10 ">
+            <h1 class="mb-10 text-white/52 text-[48px] font-bold " >Welcome Back buddy!</h1>
+
+            <form method="post" action="/login">
+
+                <div>
+                    
+
+                    <div class="flex flex-col gap-2 mb-10 ">
+                        <label for="userName">Email</label>
+                        <input 
+                        class="py-4 px-4 w-3xl rounded-2xl border border-white/52 outline-none bg-transparent "
+                        type="text" placeholder="Enter your Email..." name="email">
+                    </div>
+
+                    <div class="flex flex-col gap-2 mb-10 ">
+                        <label for="userName">Password</label>
+                        <input 
+                        class="py-4 px-4 w-3xl rounded-2xl border border-white/52 outline-none bg-transparent "
+                        type="password" placeholder="Enter A password..." name="password">
+                    </div>
+
+
+                </div>
+
+                <button class="py-4 px-4 w-3xl rounded-2xl border border-white/52 outline-none bg-emerald-600 " type="submit" >Login</button>
+
+
+            </form>
+    </div>
+</body>
+</html>
