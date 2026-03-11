@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Profile</title>
+</head>
+
+<body>
+
+<div class="h-screen flex w-full bg-black text-white p-5 gap-10">
+
+    
+
+    <!-- LEFT SIDE (Create Post) -->
+    <div class="w-1/2">
+        <div class="px-8 mb-10 flex items-center justify-center py-4 rounded-3xl bg-red-400 "><a href="/logout">LogOut</a></div>
+
+        <div class="flex flex-col gap-5 mb-20">
+            <h1 class="text-4xl text-white/60 font-bold">
+                Hello <%= user.name %>
+            </h1>
+            <p class="text-white/70">Welcome to your profile page!!</p>
+        </div>
+
+        <div>
+            <h2 class="text-[25px] font-extrabold mb-5">
+                Create a New Post
+            </h2>
+
+            <form method="post" action="/post" class="flex flex-col gap-5">
+
+                <textarea
+                    class="resize-none bg-transparent border border-white/50 w-2/3 h-40 rounded-3xl p-4"
+                    name="content"
+                    placeholder="What's on your mind..."
+                ></textarea>
+
+                <button class="w-2/3 px-4 py-3 rounded-3xl bg-emerald-800 hover:bg-emerald-700">
+                    Create Post
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE (Posts) -->
+    <div class="w-1/2 h-[85vh] overflow-y-auto grid grid-cols-2 gap-5 pr-3 items-start">
+
+        <!-- POST CARD -->
+        <% user.posts.reverse().forEach((post) => {%>
+            <div class="bg-zinc-900 rounded-3xl p-4 flex flex-col gap-5">
+                <h1 class="text-xl font-bold text-zinc-500"> <%= user.username %> </h1>
+
+                <p class="text-white/80 line-clamp-5">
+                    <%= post.content %>
+                </p>
+
+                <div class="flex gap-5">
+                    <div class="flex gap-2 border-r border-white pr-2.5 ">
+                        <a href="/like/<%= post._id %>" class="text-green-400">
+                            <%= post.likes.indexOf(user._id) ? "❤️Like" : "👎Unlike"  %>
+                        </a>
+                        <p class="text-white/52 "> <%= post.likes.length %> </p>
+                    </div>
+                    <a href="/edit/<%=post._id %>" class="text-yellow-400">Edit</a>
+                </div>
+            </div>
+        <%}) %>
+
+    </div>
+
+</div>
+
+</body>
+</html>

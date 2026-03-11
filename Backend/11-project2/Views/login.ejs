@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <div class="h-screen w-full bg-black text-white p-5 flex flex-col  items-center ">
+        <h1 class="text-7xl font-bold text-white/40 mb-20 ">Login Your Account</h1>
+        <div>
+            <form 
+            class="flex flex-col gap-5 "
+            action="/login" method="post">
+
+
+                <div class="flex flex-row gap-5 " >
+                    <div class="flex flex-col gap-1.5">
+                        <label 
+                        class="text-white/80"
+                        for="Email">Enter your Email</label>
+                        <input
+                        class="py-4 w-xs border rounded-2xl border-zinc-900 px-4 outline-none " 
+                        type="text" placeholder="What's your email" name="email">
+                    </div>
+
+
+                    <div class="flex flex-col gap-1.5">
+                        <label 
+                        class="text-white/80"
+                        for="Name">Enter your Password</label>
+                        <input
+                        class="py-4 w-xs border rounded-2xl border-zinc-900 px-4 outline-none " 
+                        type="password" placeholder="Create a strong password" name="password">
+                    </div>
+                </div>
+
+                <button class="py-4 mt-10 bg-emerald-800 w-1xs border rounded-2xl border-zinc-900 px-4" >login</button>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>

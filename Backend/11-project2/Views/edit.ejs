@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Profile</title>
+</head>
+
+<body>
+
+<div class="h-screen flex w-full bg-black text-white p-5 gap-10">
+
+    
+
+    <!-- LEFT SIDE (Create Post) -->
+    <div class="w-1/2">
+        <div class="px-8 mb-10 flex items-center justify-center py-4 rounded-3xl bg-red-400 "><a href="/profile">Back</a></div>
+
+        <div>
+            <h2 class="text-[25px] font-extrabold mb-5">
+                Edit Your Post
+            </h2>
+
+            <form method="post" action="/update/<%= post._id %>" class="flex flex-col gap-5">
+
+                <textarea
+                    class="resize-none bg-transparent border border-white/50 w-2/3 h-40 rounded-3xl p-4"
+                    name="content"
+                    placeholder="What's on your mind..."
+                ><%= post.content %></textarea>
+
+                <button class="w-2/3 px-4 py-3 rounded-3xl bg-emerald-800 hover:bg-emerald-700">
+                    Edit Post
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
