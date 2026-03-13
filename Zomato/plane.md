@@ -19,24 +19,31 @@ create a fonder and file for db.
 
 going with folder structure-> 
 
-backend |
-        |
-        scr |
-        |   |--- app.js --> we will create server.  // we have already study how to work with app.js and express here.
-        |   |
-        |   |--- db |
-        |   |       |-- db.js --> //we will connect the db here. 
-        |   |
-        |   |--- routes |
-        |   |           |-- auth.routes.js --> //to create the user auth
-        |   |
-        |   |--- controller |
-        |   |               |--auth.controller.js --> //step5 instructions
-        |   |
-        |   |--- models |
-        |   |           |--user.js
-        |
-        server.js --> we will start the server here. 
-        |
-        |
-        .env
+backend
+│
+├── src
+│   │
+│   ├── app.js
+│   │   Express app configuration
+│   │
+│   ├── db
+│   │   └── db.js
+│   │   Database connection
+│   │
+│   ├── routes
+│   │   └── auth.routes.js
+│   │   API routes for authentication
+│   │
+│   ├── controller
+│   │   └── auth.controller.js
+│   │   Business logic for authentication
+│   │
+│   ├── models
+│   │   └── user.js
+│   │   Mongoose user schema
+│
+├── server.js
+│   Starts the server
+│
+└── .env
+    Environment variables
