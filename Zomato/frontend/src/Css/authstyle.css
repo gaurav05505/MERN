@@ -1,0 +1,213 @@
+.bg {
+    /* Changed height to min-height so it doesn't cut off on short screens */
+    min-height: 100vh; 
+    width: 100%;
+    background-image: url('/registerbg.svg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Added padding to prevent the container from touching screen edges on mobile */
+    padding: 20px; 
+    box-sizing: border-box;
+    /* Added to anchor the theme toggle button */
+    position: relative; 
+    color: white; /* Ensures dark mode text defaults to white */
+}
+
+.container {
+    /* Swapped fixed width/height for responsive limits */
+    min-height: 640px; 
+    width: 100%;
+    max-width: 500px; 
+    background: #0A0A0A;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column;
+    box-sizing: border-box; /* Ensures padding stays inside the max-width */
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    text-align: center; /* Added so text stays centered when it wraps on mobile */
+}
+
+.container .heading h1 {
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.container .heading p {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.52);
+}
+
+.user {
+    margin-top: 60px;
+    width: 100%;
+}
+
+.user form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user .field { 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.user form label {
+    font-size: 14px;
+}
+
+.user form input {
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    background: #0F0F0F;
+    border: 1px solid #1D1D1D;
+    color: white;
+    font-size: 16px;
+}
+
+.user form button {
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    background: #62FF6C;
+    border: none;
+    color: #262626;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.r-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.r-cta a {
+    font-weight: bold;
+    color: #62FF6C;
+}
+
+.r-cta p {
+    color: rgba(255, 255, 255, 0.52);
+}
+
+.r-d{
+    display: flex ;
+    gap: 16px;
+}
+
+/* --- MOBILE RESPONSIVENESS (Adds Support for Phones) --- */
+@media (max-width: 600px) {
+    .container {
+        min-height: auto; /* Allows the box to shrink to fit the screen */
+        padding: 40px 20px;
+    }
+
+    .container .heading h1 {
+        font-size: 26px; /* Scales down the big heading so it fits on phones */
+    }
+
+    .container .heading p {
+        font-size: 14px; /* Scales down the subtitle slightly */
+    }
+
+    .user {
+        margin-top: 40px; /* Reduces the large gap on smaller screens */
+    }
+}
+
+/* ========================================= */
+/* --- LIGHT MODE STYLES ADDED DOWN HERE --- */
+/* ========================================= */
+
+.bg.light-mode {
+    /* Add your new light mode background URL below */
+    background-image: url('/registerbg-l.svg'); 
+    background-color: #f0f0f0; /* Fallback background color */
+    color: #111111;
+}
+
+.bg.light-mode .container {
+    background: #e9e9e9;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08); /* Optional subtle shadow to make the white box pop */
+}
+
+.bg.light-mode .container .heading p {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.bg.light-mode .user form input {
+    background: #F8F8F8;
+    border: 1px solid #E5E5E5;
+    color: #111111;
+}
+
+.bg.light-mode .user form input::placeholder {
+    color: #888888;
+}
+
+/* Note: Left the CTA button as #62FF6C since that seems to be your brand color */
+
+.bg.light-mode .r-cta p {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.bg.light-mode .r-cta a {
+    color: #2ebc37; /* Slightly darker green to make it readable on white, adjust if needed */
+}
+
+/* Style for the test toggle button */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background: #62FF6C;
+    border: none;
+    border-radius: 5px;
+    color: #232323;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.Change-Mode{
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    padding: 10px 15px;
+    background: #62FF6C;
+    border: none;
+    border-radius: 5px;
+    color: #232323;
+    font-weight: 400;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 14px;
+}

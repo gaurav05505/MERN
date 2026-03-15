@@ -1,0 +1,130 @@
+.create-reel-page{
+  max-width:420px;
+  margin:auto;
+  min-height:100vh;
+  background:#1c1c1c;
+  color:white;
+  padding:30px 20px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+
+.create-reel-page h2{
+  text-align:center;
+  margin-bottom:28px;
+  font-weight:500;
+}
+
+.create-reel-form{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.create-reel-form label{
+  font-size:14px;
+  color:#cfcfcf;
+}
+
+.create-reel-form input,
+.create-reel-form textarea{
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  background:#2a2a2a;
+  color:white;
+  font-size:14px;
+}
+
+.create-reel-form textarea{
+  resize:none;
+}
+
+.create-reel-form input:focus,
+.create-reel-form textarea:focus{
+  outline:2px solid #62FF6C;
+}
+
+.create-reel-form input[type="file"]{
+  display:none;
+}
+
+/* upload box */
+
+.upload-field{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:130px;
+  border:2px dashed #62FF6C;
+  border-radius:10px;
+  background:#2a2a2a;
+  color:#cfcfcf;
+  font-size:14px;
+  cursor:pointer;
+  text-align:center;
+  transition:0.2s;
+}
+
+.upload-field:hover{
+  background:#303030;
+}
+
+/* video preview */
+
+.video-preview-box{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.video-preview{
+  width:100%;
+  border-radius:10px;
+  background:black;
+}
+
+.video-actions{
+  display:flex;
+  gap:10px;
+}
+
+/* change button */
+
+.change-btn{
+  flex:1;
+  padding:10px;
+  background:#3a3a3a;
+  border-radius:8px;
+  text-align:center;
+  cursor:pointer;
+}
+
+/* remove button */
+
+.remove-btn{
+  flex:1;
+  padding:10px;
+  background:#ff4d4d;
+  border:none;
+  border-radius:8px;
+  color:white;
+  cursor:pointer;
+}
+
+/* submit button */
+
+.create-reel-form button{
+  margin-top:10px;
+  padding:13px;
+  background:#62FF6C;
+  color:black;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.create-reel-form button:hover{
+  transform:scale(1.02);
+}

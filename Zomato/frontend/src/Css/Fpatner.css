@@ -1,0 +1,223 @@
+
+body{
+  margin:0;
+  background:#1c1c1c;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+
+.partner-page{
+  width:100%;
+  background:#242424;
+  min-height:100vh;
+  color:#f1f1f1;
+  padding-bottom:40px;
+}
+
+
+/* HEADER */
+
+.partner-header{
+  display:flex;
+  gap:20px;
+  padding:26px 20px;
+  align-items:start;
+}
+
+.partner-avatar{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #62FF6C;
+}
+
+.partner-info{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.partner-name{
+  font-size:19px;
+  font-weight:500;
+}
+
+.partner-address{
+  font-size:13px;
+  color:#b5b5b5;
+}
+
+.partner-customers{
+  font-size:13px;
+  color:#62FF6C;
+}
+
+
+/* ACTION BUTTONS */
+
+.partner-actions{
+  display:flex;
+  gap:12px;
+  padding:0 20px 24px 20px;
+}
+
+.partner-actions button{
+  flex:1;
+  padding:11px;
+  border-radius:8px;
+  border:none;
+  font-weight:500;
+  font-size:14px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.partner-actions button:hover{
+  transform:scale(1.03);
+}
+
+.order-btn{
+  background:#62FF6C;
+  color:#1c1c1c;
+}
+
+.message-btn{
+  background:#2f2f2f;
+  color:#e8e8e8;
+}
+
+.share-btn{
+  background:#2f2f2f;
+  color:#e8e8e8;
+}
+
+
+/* STATS */
+
+.partner-stats{
+  display:flex;
+  justify-content:space-around;
+  padding:16px 0;
+  margin:0 20px 28px 20px;
+  background:#2a2a2a;
+  border-radius:10px;
+}
+
+.partner-stats h3{
+  font-size:17px;
+  font-weight:500;
+  text-align:center;
+}
+
+.partner-stats p{
+  font-size:12px;
+  color:#b5b5b5;
+  text-align:center;
+  margin-top:4px;
+}
+
+
+/* ======================
+   REELS GRID (BIGGER)
+====================== */
+
+.reels-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  padding:0 16px;
+}
+
+.reel-thumb{
+  width:100%;
+  aspect-ratio:11/16;
+  object-fit:cover;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.reel-thumb:hover{
+  transform:scale(1.04);
+}
+
+
+/* ======================
+   TABLET
+====================== */
+
+@media (min-width:768px){
+
+.partner-header{
+  padding:32px 40px;
+}
+
+.partner-actions{
+  padding:0 40px 28px 40px;
+}
+
+.partner-stats{
+  margin:0 40px 32px 40px;
+}
+
+.reels-grid{
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  padding:0 40px;
+}
+
+.reel-thumb{
+  aspect-ratio:9/16;
+}
+
+}
+
+
+/* ======================
+   DESKTOP
+====================== */
+
+@media (min-width:1024px){
+
+.partner-header{
+  padding:36px 70px;
+}
+
+.partner-avatar{
+  width:90px;
+  height:90px;
+}
+
+.partner-name{
+  font-size:22px;
+}
+
+.partner-actions{
+  padding:0 70px 30px 70px;
+  gap:14px;
+}
+
+.partner-actions button{
+  padding:12px;
+  font-size:15px;
+}
+
+.partner-stats{
+  margin:0 70px 36px 70px;
+}
+
+.partner-stats h3{
+  font-size:18px;
+}
+
+.reels-grid{
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  padding:0 80px;
+}
+
+.reel-thumb{
+  aspect-ratio:9/16;
+}
+
+}

@@ -1,0 +1,197 @@
+/* Home.css */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a; /* Dark gray for desktop background */
+}
+
+/* Centers the reel app on big screens */
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+/* The actual phone-sized container */
+.reels-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+}
+
+/* --- THE BACK BUTTON --- */
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  color: white;
+  border: none;
+  background: transparent ;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px); /* Slight blur behind the button */
+  transition: all 0.3s ease;
+}
+
+
+/* --- REELS CONTAINER & SCROLLING --- */
+.reels-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.reels-container::-webkit-scrollbar {
+  display: none;
+}
+
+.reel-item {
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: start;
+  position: relative;
+  background-color: #111;
+  display: flex;
+  justify-content: center;
+}
+
+.reel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.reel-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px;
+  box-sizing: border-box;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 30%);
+}
+
+.reel-overlay .visit{
+
+    background: transparent;
+    color: #62FF6C;
+    border: none;
+    text-decoration: none;
+
+}
+
+.reel-info {
+  color: white;
+  pointer-events: auto;
+  max-width: 75%;
+  padding-bottom: 10px;
+}
+
+.reel-username {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  color: white; 
+  font-weight: bold;
+}
+
+.reel-description {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.717);
+}
+
+.reel-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  pointer-events: auto;
+  padding-bottom: 10px;
+}
+
+.sidebar-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  gap: 10px;
+}
+
+.sidebar-btn:hover {
+  transform: scale(1.1);
+}
+
+.sidebar-btn span {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.sidebar-btn p {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.sidebar-btn:hover span {
+  color: #62FF6C; /* ✨ YOUR PRIMARY COLOR ✨ */
+  text-shadow: 0 0 10px rgba(98, 255, 108, 0.6);
+}
+
+/* 
+  ✨ RESPONSIVE DESKTOP VIEW ✨
+  Transforms layout to a mobile aspect ratio window on larger screens 
+*/
+@media (min-width: 600px) {
+  .reels-wrapper {
+    height: 90vh; /* Don't touch the top/bottom edges of browser */
+    max-width: 400px;
+    aspect-ratio: 9 / 16; /* Standard mobile ratio */
+    border-radius: 16px; /* Rounded corners like a phone */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  }
+}
+
+.reels-container{
+  height:100vh;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+}
+
+.reel-item{
+  height:100vh;
+  scroll-snap-align:start;
+  position:relative;
+}
+
+.reel-video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
