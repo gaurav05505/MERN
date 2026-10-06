@@ -1,10 +1,9 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 
 import searchRoute from "./routes/search.routes.js";
-
-dotenv.config();
+import youtubeRoute from "./routes/youtube.routes.js";
 
 const app = express();
 
@@ -18,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", searchRoute);
+app.use("/api", youtubeRoute);
 
 const PORT = process.env.PORT || 5000;
 

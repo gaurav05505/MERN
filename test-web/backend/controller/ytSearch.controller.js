@@ -1,31 +1,34 @@
-export const searchYt = async (res , req ) => {
-    try {
-        
-        const {query} = req.body; 
+import yts from 'yt-search';
 
-        if(!query || !query.trim()){
+export const searchYt = async (req, res) => {
+    try {
+        const { query } = req.body;
+
+        if (!query || !query.trim()) {
             return res.status(400).json({
-                success : false, 
+                success: false,
                 message: "search query is required"
-            }); 
+            });
         }
 
-        const res = await yts(query.trim()); 
+        const ytResponse = await yts(query.trim());
 
-        const result = res.videos.slice(0 , 5).map((video)=> ({
+        // Limit results to only top 5 videos
+        const results = (ytResponse.videos || []).slice(0, 5).map((video) => ({
             title: video.title,
             url: video.url,
             thumbnail: video.thumbnail,
             duration: video.timestamp,
             views: video.views,
-            channel: video.author?.name
-        }))
+            channel: video.author?.name,
+            content: video.description
+        }));
 
         return res.status(200).json({
-            success: true , 
-            query: query.trim(), 
-            result
-        })
+            success: true,
+            query: query.trim(),
+            results
+        });
 
     } catch (error) {
         console.error("YouTube Search Error:", error);
@@ -34,6 +37,5 @@ export const searchYt = async (res , req ) => {
             success: false,
             message: "YouTube search failed"
         });
-
     }
-}
+};
