@@ -1,33 +1,31 @@
-import {tavily} from '@tavily/core'; 
+import { tavily } from '@tavily/core';
 
 const tvly = tavily({
     apiKey: process.env.TAVILY_API_KEY
-})
+});
 
-
-export const searchWeb = async (req , res) => {
+export const searchWeb = async (req, res) => {
     try {
-        
-        const {query} = req.body; 
 
-        if(!query || !query.trim()){
+        const { query } = req.body;
+
+        if (!query || !query.trim()) {
             return res.status(400).json({
-                success  : false, 
-                message: "search query is required"
-            })
+                success: false,
+                message: "Search query is required"
+            });
         }
 
-        const res = await tvly.search(query.trim() , {
+        const response = await tvly.search(query.trim(), {
             searchDepth: "basic",
             maxResults: 5
-        })
+        });
 
         return res.status(200).json({
             success: true,
             query: query.trim(),
-            results : response.results
-        })
-
+            results: response.results
+        });
 
     } catch (error) {
         console.error(error);
@@ -37,4 +35,4 @@ export const searchWeb = async (req , res) => {
             message: "Internal server error"
         });
     }
-}
+};
