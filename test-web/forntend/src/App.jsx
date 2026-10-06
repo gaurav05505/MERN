@@ -3,7 +3,7 @@ import Websearch from './page/websearch'
 
 const App = () => {
   return (
-    <div className='h-screen w-full overflow-hidden bg-[#EBEBEB] text-black'>
+    <div className='min-h-screen w-full bg-white text-black'>
       <Websearch /> 
     </div>
   )
