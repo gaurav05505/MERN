@@ -6,11 +6,11 @@ const Ytsearchpage = () => {
   const [results, setResults] = useState([]);
 
   return (
-    <div className='relative -mt-8 z-20 mx-auto max-w-[1440px] min-h-[80vh] bg-[#E7E7E7] text-black p-8 shadow-2xl flex flex-col'>
-      {/* Search Bar + Search & History Buttons */}
+    <div className='relative -mt-6 z-20 mx-auto max-w-[1440px] min-h-[85vh] bg-[#E7E7E7] text-black p-8 shadow-2xl flex flex-col'>
+      
       <SearchBox 
         setResults={setResults} 
-        endpoint="http://localhost:5000/api/ytsearch"
+        endpoint="http://localhost:5000/api/search/youtube"
         placeholder="Search YouTube videos..."
       />
 
@@ -27,7 +27,7 @@ const Ytsearchpage = () => {
                 key={index}
                 className='flex gap-4 p-4 bg-[#DFDFDF]/70 hover:bg-[#D7D7D7] border border-neutral-300 rounded transition-all group'
               >
-                {/* Video Thumbnail */}
+                
                 {item.thumbnail ? (
                   <div className='relative w-44 h-28 shrink-0 overflow-hidden rounded bg-black'>
                     <img 
@@ -43,7 +43,6 @@ const Ytsearchpage = () => {
                   </div>
                 ) : null}
 
-                {/* Video Details */}
                 <div className='flex flex-col justify-between flex-1 min-w-0'>
                   <div>
                     <a
