@@ -13,16 +13,20 @@ export const searchYt = async (req, res) => {
 
         const ytResponse = await yts(query.trim());
 
-        // Limit results to only top 5 videos
-        const results = (ytResponse.videos || []).slice(0, 5).map((video) => ({
-            title: video.title,
-            url: video.url,
-            thumbnail: video.thumbnail,
-            duration: video.timestamp,
-            views: video.views,
-            channel: video.author?.name,
+        const results = (ytResponse.videos || [])
+        .filter(video => Number.isFinite(video.views))
+        .sort((a , b) => b.views - a.views)
+        .slice(0 , 5 )
+        .map((video) => ({
+            title: video.title, 
+            url: video.url, 
+            thumbnail: video.thumbnail, 
+            duration: video.timestamp, 
+            views: video.views, 
+            channel: video.author.name, 
             content: video.description
-        }));
+        }))
+
 
         return res.status(200).json({
             success: true,
