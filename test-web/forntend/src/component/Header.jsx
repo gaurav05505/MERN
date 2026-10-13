@@ -6,7 +6,6 @@ const Header = ({ activeTab = 'web', setActiveTab }) => {
   const tabs = [
     { id: 'web', label: 'Web Search' },
     { id: 'youtube', label: 'YouTube Search' },
-    { id: 'movies', label: 'Movies' },
     { id: 'all', label: 'All' }
   ]
 
