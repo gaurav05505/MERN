@@ -9,6 +9,9 @@ const Header = ({ activeTab = 'web', setActiveTab }) => {
     { id: 'all', label: 'All' }
   ]
 
+
+
+
   return (
     <header className="h-32 w-full bg-[#1E1E1E] px-8 flex items-center justify-between text-white">
 
@@ -65,5 +68,3 @@ const Header = ({ activeTab = 'web', setActiveTab }) => {
 }
 
 export default Header
-
-
