@@ -1,37 +1,34 @@
-import yts from 'yt-search'
+import yts from 'yt-search';
 
-const normalize = (text = "") => 
-    text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').trim(); 
+const normalize = (text = "") =>
+    text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').trim();
 
-const getRelevanceScore = (query , video )=> {
-    const queryWords = normalize(query).split(/\s+/).filter(Boolean); 
-    const title = normalize(video.title); 
-    const description = normalize(video.description); 
-    const searchableText = `${title} ${description}`; 
+const getRelevanceScore = (query, video) => {
+    const queryWords = normalize(query).split(/\s+/).filter(Boolean);
+    const title = normalize(video.title || "");
+    const description = normalize(video.description || "");
 
-    if(queryWords.length === 0 ){
-        return 0; 
+    if (queryWords.length === 0) {
+        return 0;
     }
 
-    const titleMatches = queryWords.filter(word => 
+    const titleMatches = queryWords.filter(word =>
         title.includes(word)
-    ).length; 
+    ).length;
 
-    const descriptionMatches = queryWords.filter(word => 
+    const descriptionMatches = queryWords.filter(word =>
         description.includes(word)
-    ).length; 
-
+    ).length;
 
     return Math.min(
         100,
-        (titleMatches/queryWords.length)*70 +
+        (titleMatches / queryWords.length) * 70 +
         (descriptionMatches / queryWords.length) * 30
-    ); 
+    );
+};
 
-}
-
-const getTitleScore = (title = '') =>{
-    const text = normalize(title); 
+const getTitleScore = (title = '') => {
+    const text = normalize(title);
 
     const usefulSignals = [
         'tutorial',
@@ -44,47 +41,47 @@ const getTitleScore = (title = '') =>{
         'full course'
     ];
 
-    const signalsFound = usefulSignals.filter(signal => 
+    const signalsFound = usefulSignals.filter(signal =>
         text.includes(signal)
-    ).length
-}
+    ).length;
+
+    return Math.min(100, signalsFound * 25);
+};
 
 const getDurationScore = (sec) => {
-    if(!Number.isFinite(sec) || sec <= 0 ){
-        return 0 ;
+    if (!Number.isFinite(sec) || sec <= 0) {
+        return 0;
     }
 
-    if(sec >= 300 && sec <= 3600){
-        return 100; 
+    if (sec >= 300 && sec <= 3600) {
+        return 100;
     }
-    if(sec < 300 )return (sec / 300) * 100; 
+    if (sec < 300) return (sec / 300) * 100;
 
-    return Math.max(0 , 100- ((sec - 3600)/3600)*50); 
-
-}
+    return Math.max(0, 100 - ((sec - 3600) / 3600) * 50);
+};
 
 const getPopularityScore = (views) => {
-    if(!Number.isFinite(views) || views <= 0){
-        return 0; 
+    if (!Number.isFinite(views) || views <= 0) {
+        return 0;
     }
 
-    return Math.min(100 , (Math.log10(views)/7) *100); 
-}
+    return Math.min(100, (Math.log10(views) / 7) * 100);
+};
 
-export const searchYt = async (req , res ) => {
+export const searchYt = async (req, res) => {
     try {
-        
-        const {query} = res.body; 
+        const query = req.body?.query || req.query?.q || req.query?.query;
 
-        if(typeof query !== 'string' || !query.trim()){
+        if (typeof query !== 'string' || !query.trim()) {
             return res.status(400).json({
-                success: false, 
-                Message: 'search query is required'
-            })
+                success: false,
+                message: 'search query is required'
+            });
         }
 
-        const searchQuery = query.trim(); 
-        const ytResponse = await yts(searchQuery); 
+        const searchQuery = query.trim();
+        const ytResponse = await yts(searchQuery);
 
         const results = (ytResponse.videos || [])
             .filter(video => video.title && video.url)
@@ -129,8 +126,6 @@ export const searchYt = async (req , res ) => {
             results
         });
 
-
-
     } catch (error) {
         console.error('YouTube Search Error:', error);
 
@@ -139,8 +134,4 @@ export const searchYt = async (req , res ) => {
             message: 'YouTube search failed'
         });
     }
-}
-
-
-
-
+};
