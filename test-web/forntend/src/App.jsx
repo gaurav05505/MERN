@@ -1,5 +1,5 @@
 import React from 'react'
-import Websearch from './page/websearch'
+import Websearch from './page/Websearch'
 
 const App = () => {
   return (

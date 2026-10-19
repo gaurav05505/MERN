@@ -6,14 +6,12 @@ const Header = ({ activeTab = 'web', setActiveTab }) => {
   const tabs = [
     { id: 'web', label: 'Web Search' },
     { id: 'youtube', label: 'YouTube Search' },
+    { id: 'Yt-Ai', label: 'Yt-Ai powered search' },
     { id: 'all', label: 'All' }
   ]
 
-
-
-
   return (
-    <header className="h-32 w-full bg-[#1E1E1E] px-8 flex items-center justify-between text-white">
+    <header className="h-28 w-full bg-[#1E1E1E] px-8 flex items-center justify-between text-white">
 
       {/* Brand */}
       <div
