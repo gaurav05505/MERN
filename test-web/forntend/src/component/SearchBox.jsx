@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Search, History } from 'lucide-react'
 
-const SearchBox = ({ setResults, endpoint = "http://localhost:5000/api/search", placeholder = "Search what ever you want....", onSearch }) => {
+const SearchBox = ({ setResults, endpoint = "http://localhost:5000/api/search", placeholder = "Search what ever you want....", onSearch, onLoadingChange }) => {
 
     const [query, setQuery] = useState("");
     const [loading, setLoading] = useState(false);
@@ -12,6 +12,7 @@ const SearchBox = ({ setResults, endpoint = "http://localhost:5000/api/search", 
 
         try {
             setLoading(true);
+            onLoadingChange?.(true);
             onSearch?.(query.trim());
             const response = await fetch(endpoint, {
                 method: "POST",
@@ -30,6 +31,7 @@ const SearchBox = ({ setResults, endpoint = "http://localhost:5000/api/search", 
             console.error("Search error:", error);
         } finally {
             setLoading(false);
+            onLoadingChange?.(false);
         }
     };
 

@@ -1,4 +1,5 @@
 import yts from 'yt-search'
+import { isRoadmapVideo, sanitizeRoadmapQuery } from '../utils/roadmapFilter.js'
 
 const normalize = (text = "") => 
     text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').trim(); 
@@ -84,10 +85,11 @@ export const searchYt = async (req , res ) => {
         }
 
         const searchQuery = query.trim(); 
-        const ytResponse = await yts(searchQuery); 
+        const effectiveSearchQuery = sanitizeRoadmapQuery(searchQuery);
+        const ytResponse = await yts(effectiveSearchQuery); 
 
         const results = (ytResponse.videos || [])
-            .filter(video => video.title && video.url)
+            .filter(video => video.title && video.url && !isRoadmapVideo(video))
             .map(video => {
                 const relevance = getRelevanceScore(searchQuery, video);
                 const titleScore = getTitleScore(video.title);

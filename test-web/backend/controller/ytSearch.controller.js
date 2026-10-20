@@ -1,6 +1,7 @@
 
 import yts from 'yt-search';
 import { fetchTranscript } from 'youtube-transcript-plus';
+import { isRoadmapVideo, sanitizeRoadmapQuery } from '../utils/roadmapFilter.js';
 
 const normalize = (text = '') =>
     text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').trim();
@@ -121,12 +122,22 @@ export const searchYt = async (req, res) => {
         }
 
         const searchQuery = query.trim();
-        const ytResponse = await yts(searchQuery);
+        const effectiveSearchQuery = sanitizeRoadmapQuery(searchQuery);
+        const ytResponse = await yts(effectiveSearchQuery);
 
-        // Evaluate up to 10 candidates, then return the top 5.
+        // Filter out roadmap videos, evaluate up to 10 candidates, then return the top 5.
         const videos = (ytResponse.videos || [])
-            .filter(video => video.title && video.url)
+            .filter(video => video.title && video.url && !isRoadmapVideo(video))
             .slice(0, 10);
+
+        if (!videos.length) {
+            return res.status(200).json({
+                success: true,
+                query: searchQuery,
+                rankingMethod: 'transcript-heuristic-v1',
+                results: []
+            });
+        }
 
         const evaluatedVideos = await Promise.all(
             videos.map(async (video) => {
