@@ -1,8 +1,15 @@
-import yts from 'yt-search'
-import {getTranscript} from '../service/transcript.service.js'
-import {evaluateTranscript} from '../service/aiEvaluation.service.js'
-import { isRoadmapVideo, sanitizeRoadmapQuery } from '../utils/roadmapFilter.js'
+import yts from 'yt-search';
+import { getTranscript } from '../service/transcript.service.js';
+import { evaluateTranscript } from '../service/aiEvaluation.service.js';
+import { isRoadmapVideo, sanitizeRoadmapQuery } from '../utils/roadmapFilter.js';
 
+const withTimeout = (promise, ms = 6500) => {
+    let timeoutId;
+    const timeoutPromise = new Promise((_, reject) => {
+        timeoutId = setTimeout(() => reject(new Error('AI evaluation timed out')), ms);
+    });
+    return Promise.race([promise, timeoutPromise]).finally(() => clearTimeout(timeoutId));
+};
 
 const normalize = (text = '') =>
     text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').trim();
@@ -100,15 +107,15 @@ export const searchAIPoweredYT = async (req, res) => {
 
                 if (transcript) {
                     try {
-                        aiEvaluation = await evaluateTranscript(
-                            searchQuery,
-                            transcript
+                        aiEvaluation = await withTimeout(
+                            evaluateTranscript(searchQuery, transcript),
+                            6500
                         );
                     } catch (error) {
                         aiEvaluationError = error.message;
 
-                        console.error(
-                            `AI evaluation failed for ${videoId}:`,
+                        console.warn(
+                            `AI evaluation skipped for ${videoId}:`,
                             error.message
                         );
                     }

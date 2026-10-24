@@ -9,7 +9,9 @@ const getNvidiaClient = () => {
 
     return new OpenAI({
         apiKey,
-        baseURL: 'https://integrate.api.nvidia.com/v1'
+        baseURL: 'https://integrate.api.nvidia.com/v1',
+        timeout: 7000,
+        maxRetries: 0
     });
 };
 
@@ -30,13 +32,13 @@ export const evaluateTranscript = async (query, transcript) => {
         throw new Error('Transcript is empty');
     }
 
-    // Limit input size to control latency and token usage.
-    const transcriptText = transcript.slice(0, 12000);
+    // Limit input size to 3500 chars to control latency while capturing curriculum & teaching style
+    const transcriptText = transcript.slice(0, 3500);
 
     const response = await nvidia.chat.completions.create({
-        model: process.env.NVIDIA_MODEL || 'meta/llama-3.3-70b-instruct',
+        model: process.env.NVIDIA_MODEL || 'meta/llama-3.2-11b-vision-instruct',
         temperature: 0.1,
-        max_tokens: 500,
+        max_tokens: 300,
         messages: [
             {
                 role: 'system',
@@ -48,7 +50,7 @@ Evaluate only the evidence available in the transcript.
 Do not assume that a long transcript is necessarily good.
 Do not claim factual correctness is verified without independent evidence.
 
-Return ONLY valid JSON with these fields:
+Return ONLY a raw JSON object with NO markdown fences and NO explanations:
 {
   "topicRelevance": number,
   "teachingQuality": number,
@@ -89,13 +91,13 @@ ${transcriptText}`
         throw new Error('NVIDIA returned an empty evaluation');
     }
 
-    // Extract JSON if the model wraps it in Markdown fences.
-    const jsonText = content
-        .replace(/```json/gi, '')
-        .replace(/```/g, '')
-        .trim();
+    // Extract JSON object safely even if surrounded by markdown fences or notes
+    const jsonMatch = content.match(/\{[\s\S]*?\}/);
+    if (!jsonMatch) {
+        throw new Error('No valid JSON object found in AI response');
+    }
 
-    const evaluation = JSON.parse(jsonText);
+    const evaluation = JSON.parse(jsonMatch[0]);
 
     const topicRelevance = clampScore(evaluation.topicRelevance);
     const teachingQuality = clampScore(evaluation.teachingQuality);
